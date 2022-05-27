@@ -5,45 +5,34 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static float score;
-    public static int intscore;
-    public Text highscore;
-    public Text scoreText;
-    public Movement dead;
-    public Text numberChocolate;
-    public Pause_menu pause;
+    public static int score;
+    private Text scoreText; 
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        score = 0;
-        dead = FindObjectOfType<Movement>();
-        pause = FindObjectOfType<Pause_menu>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(pause.GameIsPaused == false)
+        scoreText = GetComponent<Text>();
+        if (PlayerPrefs.GetInt("score") < 0)
         {
-            score += .5f;
-            intscore = Mathf.RoundToInt(score);
-            
+            score = 0;
         }
-
-        scoreText.text = intscore + "";
-        highscore.text = PlayerPrefs.GetInt("highscore") + "";
-        numberChocolate.text = dead.chocolate + "";
-
-        if ( PlayerPrefs.GetInt("highscore") < intscore)
+        else
         {
-            PlayerPrefs.SetInt("highscore", intscore);
-            highscore.text = intscore + "";
-
-            Debug.Log(PlayerPrefs.GetInt("highscore"));
+            score = PlayerPrefs.GetInt("score", score);
         }
     }
 
+    private void Update()
+    {
+        if (score < 0)
+        {
+            score = 0;
+        }
+        scoreText.text = "" + score;
+        PlayerPrefs.SetInt("score", score);
+    }
 
+    public static void AddPoints(int _pointstoAdd)
+    {
+        score += _pointstoAdd;
+    }
 }

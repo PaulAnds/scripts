@@ -4,34 +4,28 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float max;
-    public float rate;
-    public float speed = 0;
-    public bool enemy;
-    public ScoreManager timer;
-    public Pause_menu pause;
+    //public Transform FollowObject;
+    //void Update()
+    //{
+    //    Vector3 pos = new Vector3(FollowObject.position.x + 1, transform.position.y, transform.position.z);
+    //    transform.position = pos;
+    //}
+
+    public bool isFollowing;
+    public float xOffset, yOffset;
+
+    private PlayerController player;
 
     private void Start()
     {
-        rate = .1f;
-        max = 1f;
-        enemy = FindObjectOfType<Enemy_Movement>();
-        timer = FindObjectOfType<ScoreManager>();
-        pause = FindObjectOfType<Pause_menu>();
+        player = FindObjectOfType<PlayerController>();
+        isFollowing = true;
     }
     void Update()
     {
-        if (pause.GameIsPaused == false)
+        if(isFollowing)
         {
-            if (rate < max && enemy == false)
-            {
-                rate = rate + 0.00001f;
-                speed = (speed + 0.1f) * (rate / 60);
-                timer.enabled = true;
-            }
-
-            Vector3 pos = new Vector3(0, transform.position.y + speed, -10);
-            transform.position = pos;
+            transform.position = new Vector3(player.transform.position.x + xOffset, player.transform.position.y + yOffset, transform.position.z);
         }
     }
 }
