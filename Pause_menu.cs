@@ -36,6 +36,6 @@ public class Pause_menu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
-   
+
 
 }

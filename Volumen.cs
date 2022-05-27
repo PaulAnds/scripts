@@ -15,9 +15,9 @@ public class Volumen : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("volumen_musica"))
         {
-            PlayerPrefs.SetFloat("volumen_musica", 1);
-            volumen_musica.value = 1;
-            musica.volume = 1;
+            PlayerPrefs.SetFloat("volumen_musica", .1f);
+            volumen_musica.value = .1f;
+            musica.volume = .1f;
             PlayerPrefs.Save();
 
         }

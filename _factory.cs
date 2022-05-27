@@ -4,37 +4,12 @@ using UnityEngine;
 
 public class _factory : MonoBehaviour
 {
-    
-    public GameObject prefab;
-    public GameObject prefab2;
-    public GameObject prefab3;
-    public GameObject prefab4;
-    public GameObject background;
-    int randomInt;
+    [SerializeField]
+    private MonoBehaviour prefab;
 
-    public GameObject GetNewInstance()
+    public MonoBehaviour GetNewInstance()
     {
-        randomInt = Random.Range(0, 4);
-
-        if(randomInt == 0)
-        {
-            return Instantiate(prefab);
-        }
-        if (randomInt == 1)
-        {
-            return Instantiate(prefab2);
-        }
-        if (randomInt == 2)
-        {
-            return Instantiate(prefab3);
-        }
-        if (randomInt == 3)
-        {
-            return Instantiate(prefab4);
-        }
-
-        return Instantiate(background);
-
+        return Instantiate(prefab);
     }
 
 }
